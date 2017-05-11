@@ -1,4 +1,20 @@
 <html>
 <title> openshift test page </title>
 	openshift raspisimon test page
+Server Uptime:
+<?php
+function linuxUptime() {
+  $ut = strtok( exec( "cat /proc/uptime" ), "." );
+  $days = sprintf( "%2d", ($ut/(3600*24)) );
+  $hours = sprintf( "%2d", ( ($ut % (3600*24)) / 3600) );
+  $min = sprintf( "%2d", ($ut % (3600*24) % 3600)/60  );
+  $sec = sprintf( "%2d", ($ut % (3600*24) % 3600)%60  );
+  return array( $days, $hours, $min, );
+}
+
+$ut = linuxUptime();
+// If you would like to show the seconds as well just add [ , $ut[3] seconds ] after minutes.
+echo " $ut[0] days, $ut[1] hours, $ut[2] minutes, ";
+?>
+	
 </html>
